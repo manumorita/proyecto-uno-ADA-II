@@ -3,7 +3,10 @@ package edu.ada;
 import edu.ada.modelo.RedSocial;
 import edu.ada.modelo.ResultadoModEx;
 import edu.ada.pruebas.GeneradorPruebas;
+// importamos los metodos desarrollados para pruebis
 import edu.ada.nucleo.ModExFB;
+import edu.ada.nucleo.ModExPD;
+
 
 public class Main {
 
@@ -36,6 +39,21 @@ public class Main {
         );
         System.out.println(
                 "Extremismo: " + resultado.getExtremismo()
+        );
+
+
+        // Ejecutamos programación dinamica.
+        ResultadoModEx resultado2 = ModExPD.modexPD(rs);
+
+        System.out.println("\n=== RESULTADO PROGRAMACIÓN DINÁMICA ===");
+        System.out.println(
+                "Estrategia: " + resultado2.getEstrategia()
+        );
+        System.out.println(
+                "Esfuerzo: " + resultado2.getEsfuerzo()
+        );
+        System.out.println(
+                "Extremismo: " + resultado2.getExtremismo()
         );
     }
 }
