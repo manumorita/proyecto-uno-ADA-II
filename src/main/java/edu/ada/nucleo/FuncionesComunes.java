@@ -24,7 +24,7 @@ public class FuncionesComunes {
                         * (1 - agente.getReceptividad())
                         * agente.getInfluencia();
 
-                total += (int) Math.ceil(costo);
+                total += (int) Math.ceil(costo - 1e-9);
             }
         }
 
