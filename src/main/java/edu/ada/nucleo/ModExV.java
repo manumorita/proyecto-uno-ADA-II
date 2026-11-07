@@ -64,8 +64,7 @@ public class ModExV {
 
         if (mejor != null) {
             solucionRescate[mejor.getIndice()] = true;
-            beneficioRescate = mejor.getBeneficio()
-                    + completarPorRazon(candidatos, presupuesto - mejor.getPeso(), solucionRescate);
+            beneficioRescate = mejor.getBeneficio() + completarPorRazon(candidatos, presupuesto - mejor.getPeso(), solucionRescate);
         }
 
 
@@ -104,7 +103,7 @@ public class ModExV {
     private static double razonDe(int peso, double beneficio) {
 
         if (peso == 0) {
-            return Double.MAX_VALUE;
+            return 1000000;
         }
 
         return beneficio / peso;
@@ -130,10 +129,7 @@ public class ModExV {
     }
 
 
-    private static double completarPorRazon(
-            List<Candidato> candidatos,
-            int presupuestoDisponible,
-            boolean[] elegidos) {
+    private static double completarPorRazon(List<Candidato> candidatos, int presupuestoDisponible, boolean[] elegidos) {
 
         double beneficioAgregado = 0;
 
@@ -147,8 +143,8 @@ public class ModExV {
 
             if (c.getPeso() <= presupuestoDisponible) {
                 elegidos[c.getIndice()] = true;
-                presupuestoDisponible -= c.getPeso();
-                beneficioAgregado += c.getBeneficio();
+                presupuestoDisponible = presupuestoDisponible - c.getPeso();
+                beneficioAgregado = beneficioAgregado + c.getBeneficio();
             }
         }
 
