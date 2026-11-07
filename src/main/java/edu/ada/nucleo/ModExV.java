@@ -114,17 +114,28 @@ public class ModExV {
 
         candidatos.sort((a, b) -> {
 
-            int porRazon = Double.compare(b.getRazon(), a.getRazon());
-            if (porRazon != 0) {
-                return porRazon;
+            if (a.getRazon() > b.getRazon()) {
+                return -1;
+            }
+            if (a.getRazon() < b.getRazon()) {
+                return 1;
             }
 
-            int porBeneficio = Double.compare(b.getBeneficio(), a.getBeneficio());
-            if (porBeneficio != 0) {
-                return porBeneficio;
+            if (a.getBeneficio() > b.getBeneficio()) {
+                return -1;
+            }
+            if (a.getBeneficio() < b.getBeneficio()) {
+                return 1;
             }
 
-            return Integer.compare(a.getIndice(), b.getIndice());
+            if (a.getIndice() < b.getIndice()) {
+                return -1;
+            }
+            if (a.getIndice() > b.getIndice()) {
+                return 1;
+            }
+
+            return 0;
         });
     }
 
