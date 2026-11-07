@@ -6,13 +6,14 @@ import edu.ada.pruebas.GeneradorPruebas;
 // importamos los metodos desarrollados para pruebis
 import edu.ada.nucleo.ModExFB;
 import edu.ada.nucleo.ModExPD;
+import edu.ada.nucleo.ModExV;
 
 
 public class Main {
 
     public static void main(String[] args) {
 
-        // Generamos una red reproducible.
+        // generamos una red con semilla
         RedSocial rs = GeneradorPruebas.generarRed(
                 5,
                 100,
@@ -27,7 +28,7 @@ public class Main {
                 "Presupuesto: " + rs.getRMax()
         );
 
-        // Ejecutamos fuerza bruta.
+        // ejecutamos fuerza bruta
         ResultadoModEx resultado = ModExFB.modexFB(rs);
 
         System.out.println("\n=== RESULTADO FUERZA BRUTA ===");
@@ -41,8 +42,21 @@ public class Main {
                 "Extremismo: " + resultado.getExtremismo()
         );
 
+        // ejecutamos programacio voraz
+        ResultadoModEx resultadoVoraz = ModExV.modexV(rs);
 
-        // Ejecutamos programación dinamica.
+        System.out.println("\n=== RESULTADO VORAZ ===");
+        System.out.println(
+                "Estrategia: " + resultadoVoraz.getEstrategia()
+        );
+        System.out.println(
+                "Esfuerzo: " + resultadoVoraz.getEsfuerzo()
+        );
+        System.out.println(
+                "Extremismo: " + resultadoVoraz.getExtremismo()
+        );
+
+        // ejecutamos programacion dinamica
         ResultadoModEx resultado2 = ModExPD.modexPD(rs);
 
         System.out.println("\n=== RESULTADO PROGRAMACIÓN DINÁMICA ===");
