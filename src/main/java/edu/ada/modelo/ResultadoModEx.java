@@ -8,15 +8,10 @@ public class ResultadoModEx {
     private final int esfuerzo;
     private final double extremismo;
 
-    public ResultadoModEx(
-            List<Integer> estrategia,
-            int esfuerzo,
-            double extremismo) {
+    public ResultadoModEx(List<Integer> estrategia, int esfuerzo, double extremismo) {
 
         if (estrategia == null) {
-            throw new IllegalArgumentException(
-                    "La estrategia no puede ser nula"
-            );
+            throw new IllegalArgumentException("La estrategia no puede ser nula");
         }
 
         this.estrategia = List.copyOf(estrategia);
