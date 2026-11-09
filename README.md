@@ -1,4 +1,3 @@
-==============================================================================
  PROYECTO ModEx - Moderando el extremismo de opiniones en una red social
  Analisis y Diseno de Algoritmos II
  Escuela de Ingenieria de Sistemas y Computacion
