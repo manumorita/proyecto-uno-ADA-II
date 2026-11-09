@@ -1,8 +1,7 @@
- PROYECTO ModEx - Moderando el extremismo de opiniones en una red social
- Analisis y Diseno de Algoritmos II
- Escuela de Ingenieria de Sistemas y Computacion
- Profesor: Jesus Alexander Aranda
-==============================================================================
+ModEx — Moderando el extremismo de opiniones en una red social
+
+Proyecto de curso · Análisis y Diseño de Algoritmos II
+------------------------------------------------------------------------------
 
 Integrantes del grupo:
   - Valeria Zamudio Arevalo - 2415210
