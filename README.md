@@ -6,7 +6,7 @@
 
 ---
 
-## 👥 Integrantes del Grupo
+## Integrantes del Grupo
 
 | Nombre | Código |
 | :--- | :--- |
@@ -100,7 +100,7 @@ java -jar target/modex-1.0-SNAPSHOT.jar
 2. Verifique que el SDK del proyecto esté configurado en **Java 21** (`File > Project Structure > Project > SDK`).
 3. Navegue hasta el archivo:  
    `src/main/java/edu/ada/interfaz/AppModEx.java`
-4. Haga clic en el botón verde de ejecución (**Run** ▶) situado al lado del método `main`.
+4. Haga clic en el botón verde de ejecución (**Run**) situado al lado del método `main`.
 5. Se desplegará la interfaz gráfica de la aplicación.
 
 ---
