@@ -2,13 +2,15 @@
  PROYECTO ModEx - Moderando el extremismo de opiniones en una red social
  Analisis y Diseno de Algoritmos II
  Escuela de Ingenieria de Sistemas y Computacion
- Profesor: Jesus Alexander Aranda    Monitor: Samuel Galindo
+ Profesor: Jesus Alexander Aranda
 ==============================================================================
 
 Integrantes del grupo:
-  - [Nombre Apellido - codigo]
-  - [Nombre Apellido - codigo]
-  - [Nombre Apellido - codigo]
+  - Valeria Zamudio Arevalo - 2415210
+  - Samuel Banguero Ortega - 2418671
+  - Juan Jose Rodriguez Lozano - 2419084
+  - Manuela Martinez Moncada - 2375458
+
 
 Repositorio: https://github.com/manumorita/proyecto-uno-ADA-II
 
