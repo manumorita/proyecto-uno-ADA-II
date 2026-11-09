@@ -10,15 +10,11 @@ public class RedSocial {
     public RedSocial(List<Agente> agentes, int rMax) {
 
         if (agentes == null) {
-            throw new IllegalArgumentException(
-                    "La lista de agentes no puede ser nula"
-            );
+            throw new IllegalArgumentException("La lista de agentes no puede ser nula");
         }
 
         if (rMax < 0) {
-            throw new IllegalArgumentException(
-                    "El presupuesto no puede ser negativo"
-            );
+            throw new IllegalArgumentException("El presupuesto no puede ser negativo");
         }
 
         this.agentes = List.copyOf(agentes);
