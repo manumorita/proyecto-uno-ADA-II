@@ -14,17 +14,13 @@ import edu.ada.modelo.ResultadoModEx;
 
 public class EscritorArchivo {
 
-    /**
-     * Devuelve la salida exactamente como la exige el enunciado:
-     * 1) extremismo, 2) esfuerzo, 3) una línea por agente con 0 o 1.
-     * No agrega encabezados ni información adicional.
-     */
     public static String formatearSalida(ResultadoModEx resultado) {
         if (resultado == null) {
             throw new IllegalArgumentException("El resultado no puede ser nulo");
         }
 
         List<String> lineas = new ArrayList<>();
+
         lineas.add(String.format(Locale.ROOT, "%.4f", resultado.getExtremismo()));
         lineas.add(Integer.toString(resultado.getEsfuerzo()));
 
@@ -32,6 +28,7 @@ public class EscritorArchivo {
             if (valor == null || (valor != 0 && valor != 1)) {
                 throw new IllegalArgumentException("La estrategia solo puede contener 0 y 1");
             }
+
             lineas.add(Integer.toString(valor));
         }
 
@@ -48,13 +45,19 @@ public class EscritorArchivo {
         }
 
         List<String> lineas = new ArrayList<>();
+
         lineas.add(Integer.toString(red.getCantidadAgentes()));
 
         for (Agente agente : red.getAgentes()) {
-            lineas.add(agente.getOpinion() + ", " + agente.getReceptividad() + ", " + agente.getInfluencia());
+            lineas.add(
+                agente.getOpinion() + ", "
+                + agente.getReceptividad() + ", "
+                + agente.getInfluencia()
+            );
         }
 
         lineas.add(Integer.toString(red.getRMax()));
+
         Files.write(ruta, lineas, StandardCharsets.UTF_8);
     }
 }

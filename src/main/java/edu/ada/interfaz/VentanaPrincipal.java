@@ -68,7 +68,6 @@ public class VentanaPrincipal extends JFrame {
 
     private static final String[] NOMBRES = {"Fuerza bruta", "Voraz", "Programacion dinamica"};
 
-    // ---------- paleta y fuentes ----------
     private static final Color FONDO = new Color(0xF1F5FB);
     private static final Color AZUL = new Color(0x2563EB);
     private static final Color AZUL_OSCURO = new Color(0x1E3A8A);
@@ -83,19 +82,15 @@ public class VentanaPrincipal extends JFrame {
 
     private static final Font FUENTE = new Font("Segoe UI", Font.PLAIN, 13);
     private static final Font FUENTE_NEGRITA = new Font("Segoe UI", Font.BOLD, 13);
-    // guarda lo que dio una corrida de un algoritmo
     private static class Ejecucion {
         String nombre;
         ResultadoModEx resultado;
         double milisegundos;
         String error;
-        // corrida de PD usada como referencia de optimalidad (puede ser null)
         Ejecucion referencia;
     }
 
-    // ---------- componentes con estilo propio ----------
 
-    // panel con esquinas redondeadas
     private static class Tarjeta extends JPanel {
 
         private final Color relleno;
@@ -125,7 +120,6 @@ public class VentanaPrincipal extends JFrame {
         }
     }
 
-    // boton con esquinas redondeadas
     private static class BotonRedondo extends JButton {
 
         enum Estilo {PRIMARIO, SECUNDARIO}
@@ -213,7 +207,6 @@ public class VentanaPrincipal extends JFrame {
         }
     }
 
-    // borde redondeado de una sola linea (para el combo)
     private static class BordeRedondo extends AbstractBorder {
 
         private final Color color;
@@ -247,7 +240,6 @@ public class VentanaPrincipal extends JFrame {
         }
     }
 
-    // barras de desplazamiento delgadas y redondeadas
     private static class ScrollModerno extends BasicScrollBarUI {
 
         @Override
@@ -300,7 +292,6 @@ public class VentanaPrincipal extends JFrame {
         }
     }
 
-    // celdas con espacio interno y filas alternadas
     private static class CeldaRenderer extends DefaultTableCellRenderer {
 
         @Override
@@ -315,11 +306,7 @@ public class VentanaPrincipal extends JFrame {
                 setForeground(AZUL_OSCURO);
             } else {
                 setForeground(TEXTO);
-                if (fila % 2 == 0) {
-                    setBackground(Color.WHITE);
-                } else {
-                    setBackground(FILA_ALTERNA);
-                }
+                setBackground(fila % 2 == 0 ? Color.WHITE : FILA_ALTERNA);
             }
 
             return this;
@@ -347,7 +334,6 @@ public class VentanaPrincipal extends JFrame {
         }
     }
 
-    // ---------- estado ----------
 
     private RedSocial red;
     private int[] costos;
@@ -394,7 +380,6 @@ public class VentanaPrincipal extends JFrame {
         habilitarBotones(false);
     }
 
-    // modelo de tabla donde no se pueden editar las celdas
     private static DefaultTableModel crearModelo(String... columnas) {
 
         return new DefaultTableModel(columnas, 0) {
@@ -516,18 +501,9 @@ public class VentanaPrincipal extends JFrame {
         getContentPane().setBackground(FONDO);
         ((JComponent) getContentPane()).setBorder(new EmptyBorder(16, 18, 18, 18));
 
-        JPanel titulos = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
-        titulos.setOpaque(false);
-
         lblRed.setFont(FUENTE);
         lblRed.setForeground(TEXTO_SUAVE);
 
-        JPanel encabezado = new JPanel(new BorderLayout());
-        encabezado.setOpaque(false);
-        encabezado.add(titulos, BorderLayout.WEST);
-        encabezado.add(lblRed, BorderLayout.EAST);
-
-        // ----- barra de acciones -----
         estilizarCombo();
 
         JLabel lblAlgoritmo = new JLabel("Algoritmo");
@@ -564,7 +540,6 @@ public class VentanaPrincipal extends JFrame {
         norte.add(filaSuperior, BorderLayout.NORTH);
         norte.add(barra, BorderLayout.CENTER);
 
-        // ----- tarjeta de entrada -----
         JTable tablaEntrada = new JTable(modeloEntrada);
         estilizarTabla(tablaEntrada);
 
@@ -577,7 +552,6 @@ public class VentanaPrincipal extends JFrame {
         tarjetaEntrada.add(tituloEntrada, BorderLayout.NORTH);
         tarjetaEntrada.add(crearScroll(tablaEntrada), BorderLayout.CENTER);
 
-        // ----- tarjeta de resultados -----
         JTable tablaSalida = new JTable(modeloSalida);
         estilizarTabla(tablaSalida);
 
@@ -643,7 +617,6 @@ public class VentanaPrincipal extends JFrame {
         tarjetaDerecha.add(selector, BorderLayout.NORTH);
         tarjetaDerecha.add(contenidoDerecho, BorderLayout.CENTER);
 
-        // entrada a la izquierda, resultado y comparacion a la derecha
         JSplitPane division = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tarjetaEntrada, tarjetaDerecha);
         division.setUI(new BasicSplitPaneUI() {
             @Override
@@ -678,26 +651,19 @@ public class VentanaPrincipal extends JFrame {
         btnTabArchivo.addActionListener(e -> mostrarPestana(2));
     }
 
-    // 0 = resultado, 1 = comparacion
     private void mostrarPestana(int indice) {
 
-        if (indice == 0) {
-            cartas.show(contenidoDerecho, "res");
-        } else if (indice == 1) {
-            cartas.show(contenidoDerecho, "cmp");
-        } else {
-            cartas.show(contenidoDerecho, "archivo");
-        }
+        String[] nombresPestanas = {"res", "cmp", "archivo"};
+        cartas.show(contenidoDerecho, nombresPestanas[indice]);
 
-        btnTabResultado.setEstilo(indice == 0
-                ? BotonRedondo.Estilo.PRIMARIO : BotonRedondo.Estilo.SECUNDARIO);
-        btnTabComparacion.setEstilo(indice == 1
-                ? BotonRedondo.Estilo.PRIMARIO : BotonRedondo.Estilo.SECUNDARIO);
-        btnTabArchivo.setEstilo(indice == 2
-                ? BotonRedondo.Estilo.PRIMARIO : BotonRedondo.Estilo.SECUNDARIO);
+        BotonRedondo[] botones = {btnTabResultado, btnTabComparacion, btnTabArchivo};
+        for (int i = 0; i < botones.length; i++) {
+            BotonRedondo.Estilo estilo = i == indice
+                    ? BotonRedondo.Estilo.PRIMARIO : BotonRedondo.Estilo.SECUNDARIO;
+            botones[i].setEstilo(estilo);
+        }
     }
 
-    // mientras corre un algoritmo se desactivan los botones
     private void habilitarBotones(boolean ocupado) {
 
         boolean hayRed = red != null;
@@ -774,6 +740,7 @@ public class VentanaPrincipal extends JFrame {
 
         red = nueva;
         resultadoActual = null;
+        btnTabComparacion.setEnabled(false);
         costos = new int[red.getCantidadAgentes()];
 
         modeloEntrada.setRowCount(0);
@@ -856,7 +823,6 @@ public class VentanaPrincipal extends JFrame {
         return archivo;
     }
 
-    // corre un algoritmo (0 = FB, 1 = voraz, 2 = PD) y mide el tiempo
     private static Ejecucion correr(int indice, RedSocial rs) {
 
         Ejecucion ejecucion = new Ejecucion();
@@ -902,14 +868,12 @@ public class VentanaPrincipal extends JFrame {
         boolean verificar = chkOptimo.isSelected() && indice != 2;
         habilitarBotones(true);
 
-        // se corre en otro hilo para que la ventana no se quede congelada
         new SwingWorker<Ejecucion, Void>() {
             @Override
             protected Ejecucion doInBackground() {
 
                 Ejecucion ejecucion = correr(indice, rs);
 
-                // PD es exacta: sirve de referencia para decir si el resultado es optimo
                 if (verificar) {
                     ejecucion.referencia = correr(2, rs);
                 }
@@ -1106,15 +1070,13 @@ public class VentanaPrincipal extends JFrame {
 
     private void mostrarComparacion(List<Ejecucion> ejecuciones) {
 
-        // el optimo sale de los algoritmos exactos: fuerza bruta y PD
-        double optimo = Double.MAX_VALUE;
+        double optimo = Double.POSITIVE_INFINITY;
 
         Ejecucion fb = ejecuciones.get(0);
         Ejecucion pd = ejecuciones.get(2);
 
         int rMax = red.getRMax();
 
-        // solo cuentan soluciones aplicables
         if (fb.resultado != null && fb.resultado.getEsfuerzo() <= rMax) {
             optimo = Math.min(optimo, fb.resultado.getExtremismo());
         }
@@ -1135,14 +1097,10 @@ public class VentanaPrincipal extends JFrame {
 
             boolean esAplicable = r.getEsfuerzo() <= rMax;
 
-            String aplicable = "NO";
-            if (esAplicable) {
-                aplicable = "Si";
-            }
+            String aplicable = esAplicable ? "Si" : "NO";
 
-            // para ser optima tiene que ser aplicable Y tener el menor extremismo
             String esOptimo = "-";
-            if (optimo != Double.MAX_VALUE) {
+            if (!Double.isInfinite(optimo)) {
                 esOptimo = "NO";
                 if (esAplicable && r.getExtremismo() <= optimo + 1e-9) {
                     esOptimo = "Si";
