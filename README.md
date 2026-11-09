@@ -1,7 +1,6 @@
-ModEx — Moderando el extremismo de opiniones en una red social
-
-Proyecto de curso · Análisis y Diseño de Algoritmos II
-------------------------------------------------------------------------------
+ModEx — Moderación del Extremismo de Opiniones en Redes Sociales  
+Análisis y Diseño de Algoritmos II  
+================================================================================
 
 Integrantes del grupo:
   - Valeria Zamudio Arevalo - 2415210
