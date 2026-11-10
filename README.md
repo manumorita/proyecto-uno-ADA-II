@@ -54,7 +54,7 @@ java -version
 ```text
 .
 ├── Readme.md                       # Documentación del proyecto.
-├── Informe.pdf                     # Informe detallado (complejidad, corrección, comparación y conclusiones).
+├── Informe ADA II.pdf                     # Informe detallado (complejidad, corrección, comparación y conclusiones).
 ├── pom.xml                         # Configuración de Maven (Java 21, ejecutable con edu.ada.interfaz.AppModEx).
 ├── target/
 │   └── modex-1.0-SNAPSHOT.jar      # Archivo ejecutable listo para correr.
