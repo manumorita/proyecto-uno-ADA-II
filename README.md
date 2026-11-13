@@ -49,59 +49,72 @@ java -version
 
 ---
 
-## 3. Estructura de Archivos Entregados
+## 3. Estructura de la Entrega
+
+La entrega se compone de cuatro elementos, empaquetados en un único archivo comprimido:
 
 ```text
 .
-├── Readme.md                       # Documentación del proyecto.
-├── Informe ADA II.pdf                     # Informe detallado (complejidad, corrección, comparación y conclusiones).
-├── pom.xml                         # Configuración de Maven (Java 21, ejecutable con edu.ada.interfaz.AppModEx).
-├── target/
-│   └── modex-1.0-SNAPSHOT.jar      # Archivo ejecutable listo para correr.
-├── entradas_voraz/                 # Casos de prueba en formato de entrada (.txt).
-└── src/main/java/edu/ada/          # Código fuente del proyecto:
-    ├── Main.java                   # Prueba rápida por consola con semilla aleatoria.
-    ├── modelo/
-    │   ├── Agente.java             # Estructura del agente: <opinión, receptividad, influencia>.
-    │   ├── RedSocial.java          # Estructura de la red: <AG, R_max>.
-    │   └── ResultadoModEx.java     # Tripleta: (estrategia, esfuerzo, extremismo).
-    ├── nucleo/
-    │   ├── FuncionesComunes.java   # Funciones de esfuerzo(), ext() y es_aplicable().
-    │   ├── ModExFB.java            # Fuerza bruta: evalúa las 2^n estrategias posibles.
-    │   ├── ModExV.java             # Algoritmo voraz: ordena agentes por razón beneficio/esfuerzo.
-    │   └── ModExPD.java            # Programación dinámica tipo mochila (tabla dp y reconstrucción).
-    ├── interfaz/
-    │   ├── AppModEx.java           # Clase principal de la aplicación GUI.
-    │   ├── VentanaPrincipal.java   # Ventana Swing con visualización y controles.
-    │   ├── LectorArchivo.java      # Parser para lectura de archivos de entrada.
-    │   └── EscritorArchivo.java    # Exportador de resultados a archivo plano.
-    └── pruebas/
-        ├── GeneradorPruebas.java   # Generador de redes aleatorias parametrizadas.
-        └── PruebasVoraz.java       # Script generador de los casos en entradas_voraz/.
+├── Informe ADA II.pdf              # Informe del proyecto (complejidad, corrección, comparación y conclusiones).
+├── Readme.txt                      # Descripción de los archivos entregados e instrucciones de ejecución.
+├── ModExApp.jar                    # EJECUTABLE listo para correr.
+└── CodigoFuente/                   # Código fuente del proyecto:
+    ├── pom.xml                     # Configuración de Maven (Java 21, clase principal edu.ada.interfaz.AppModEx).
+    ├── entradas_voraz/             # Casos de prueba (ejemplo1, ejemplo2 del enunciado y entrada1...entrada9).
+    ├── pruebas/                    # Casos de prueba adicionales (prueba1...prueba9).
+    └── src/main/java/edu/ada/
+        ├── Main.java                   # Prueba rápida por consola con semilla aleatoria.
+        ├── modelo/
+        │   ├── Agente.java             # Estructura del agente: <opinión, receptividad, influencia>.
+        │   ├── RedSocial.java          # Estructura de la red: <AG, R_max>.
+        │   └── ResultadoModEx.java     # Tripleta: (estrategia, esfuerzo, extremismo).
+        ├── nucleo/
+        │   ├── FuncionesComunes.java   # Funciones de esfuerzo(), ext() y es_aplicable().
+        │   ├── ModExFB.java            # Fuerza bruta: evalúa las 2^n estrategias posibles.
+        │   ├── ModExV.java             # Algoritmo voraz: ordena agentes por razón beneficio/esfuerzo.
+        │   └── ModExPD.java            # Programación dinámica tipo mochila (tabla dp y reconstrucción).
+        ├── interfaz/
+        │   ├── AppModEx.java           # Clase principal de la aplicación GUI.
+        │   ├── VentanaPrincipal.java   # Ventana Swing con visualización y controles.
+        │   ├── LectorArchivo.java      # Parser para lectura de archivos de entrada.
+        │   └── EscritorArchivo.java    # Exportador de resultados a archivo plano.
+        └── pruebas/
+            ├── GeneradorPruebas.java   # Generador de redes aleatorias parametrizadas.
+            └── PruebasVoraz.java       # Script generador de los casos en entradas_voraz/.
 ```
 
 ---
 
 ## 4. Instrucciones de Ejecución
 
-### 4.1 Ejecutar la aplicación gráfica (.JAR compilado)
+### 4.1 Ejecutar la aplicación gráfica (`ModExApp.jar`)
 
-Ejecute la aplicación directamente desde la terminal con el siguiente comando:
+Desde la carpeta donde se encuentra `ModExApp.jar`, ejecute:
 
 ```bash
-java -jar target/modex-1.0-SNAPSHOT.jar
+java -jar ModExApp.jar
 ```
 
-*(En la mayoría de sistemas operativos también puede ejecutarlo haciendo doble clic sobre el archivo `.jar`).*
+*(En la mayoría de sistemas operativos también puede ejecutarlo haciendo doble clic sobre el archivo `ModExApp.jar`).*
 
 ### 4.2 Ejecutar desde IntelliJ IDEA
 
-1. Abra IntelliJ IDEA y seleccione **File > Open...**, eligiendo la carpeta raíz del proyecto (donde se encuentra `pom.xml`). Confirme en **Open as Project** y espere a que Maven importe las dependencias.
+1. Abra IntelliJ IDEA y seleccione **File > Open...**, eligiendo la carpeta `CodigoFuente` (donde se encuentra `pom.xml`). Confirme en **Open as Project** y espere a que Maven termine de importar.
 2. Verifique que el SDK del proyecto esté configurado en **Java 21** (`File > Project Structure > Project > SDK`).
 3. Navegue hasta el archivo:  
    `src/main/java/edu/ada/interfaz/AppModEx.java`
 4. Haga clic en el botón verde de ejecución (**Run**) situado al lado del método `main`.
 5. Se desplegará la interfaz gráfica de la aplicación.
+
+### 4.3 Recompilar el ejecutable (opcional)
+
+Desde la carpeta `CodigoFuente`:
+
+```bash
+mvn clean package
+```
+
+Maven genera el archivo `target/modex-1.0-SNAPSHOT.jar`, que es equivalente a `ModExApp.jar` (solo cambia el nombre) y se ejecuta con `java -jar`.
 
 ---
 
@@ -126,7 +139,7 @@ R_max
 * $inf$: Influencia (real entre $1.0$ y $3.0$).
 * $R_{max}$: Esfuerzo máximo disponible (entero $\ge 0$).
 
-#### Ejemplo (`entradas_voraz/ejemplo1.txt`):
+#### Ejemplo (`CodigoFuente/entradas_voraz/ejemplo1.txt`):
 
 ```text
 3
